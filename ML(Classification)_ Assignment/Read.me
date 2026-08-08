@@ -1,0 +1,14 @@
+Project Summary
+
+Heart Failure Prediction:Classification Model Optimization
+
+1. Data Exploration & Baseline Setup:Is project mein humne Heart Failure Clinical Records Dataset par binary classification apply ki. Pehle stage par baseline model train kiya gaya taaki initial accuracy, precision, recall, aur F1-score ka benchmark set kiya ja sake.
+
+2. Class Balancing (SMOTE) & Feature Scaling:Model ki classification accuracy aur generalizability ko optimize karne ke liye humne preprocessing pipeline mein do essential techniques implement ki:
+
+SMOTE (Synthetic Minority Over-sampling Technique): Dataset mein target class (DEATH_EVENT) ka imbalance khatam karne ke liye SMOTE ka use kiya gaya. Isse training set mein Minority Class (Deceased Patients) ke synthetic samples create hue aur dataset perfect 50-50 balance ho gaya, jisse model ki Recall (High-risk patient detection) dramatically improve hui.
+
+Standard Scaling (StandardScaler): Model features (jaise age, creatinine_phosphokinase, platelets, etc.) ki variances ko standard score ($Mean = 0, Std = 1$) par scale kiya gaya taaki algorithms bias-free weights learn kar sakein.
+
+3. Model Comparison & Optimization:Multiple classification algorithms (Logistic Regression, Decision Tree, Random Forest, SVM, KNN) ko scaled aur balanced data par fit kar ke compare kiya gaya. Comparisons ke baad Random Forest Classifier ne overall top accuracy (~84-85%) aur highest F1-score demonstrate kiya.
+
