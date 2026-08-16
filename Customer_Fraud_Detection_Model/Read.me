@@ -1,0 +1,32 @@
+Assignment Summary & Technical Explanations
+
+1. Categorical Encoding Strategy
+Konsi Technique Use Ki: One-Hot Encoding (pd.get_dummies)
+
+Kyun Choose Ki: Dataset mein jo categorical features the (jaise payment method ya device type) unme koi aapsi muqabla, rank ya order (hierarchy) nahi tha. Agar hum Label Encoding use karte toh model ghalti se yeh samajh baithta ke category 3, category 1 se bari hai. Isliye One-Hot Encoding use ki taaki har category ka alag binary column bane aur model bina kisi fake ordering bias ke sahi patterns seekh sake.
+
+2. Feature Scaling Strategy
+Konsi Technique Use Ki: StandardScaler
+
+Kyun Choose Ki: Numerical features (jaise transaction amount, customer age, tenure) ke numeric ranges bohot alag alag the. StandardScaler ne saare numeric columns ko mean = 0 aur standard deviation = 1 par center kar diya. Iska fayda yeh hua ke jin columns ke numbers bare the, unhone chote numbers wale columns ko overpower nahi kiya aur saare features ko barabar ka importance mila.
+
+3. Class Imbalance (SMOTE) Ka Tariqa
+Konsi Technique Use Ki: SMOTE (Synthetic Minority Over-sampling Technique)
+
+Kyun Choose Ki: Dataset mein Fraud cases bohot kam the (sirf 3% se bhi kam). Agar hum imbalance fix na karte toh model aaram se har transaction ko non-fraud bol kar 97% fake accuracy dikha deta. Humne SMOTE ke zariye training set mein fake fraud examples generate kiye taaki models fraud ke patterns seekh sakein. Data leakage se bachne ke liye SMOTE sirf X_train par lagaya gaya, test set ko bilkul haath nahi lagaya.
+
+4. Saare Models Ka Performance Summary
+Baseline Logistic Regression: Accuracy = 65% | Fraud Recall = 0.31 (31%)
+
+Decision Tree Classifier: Accuracy = 55% | Fraud Recall = 0.46 (46%)
+
+Random Forest Classifier: Accuracy = 97% | Fraud Recall = 0.00 (0%)
+
+XGBoost Classifier: Accuracy = 97% | Fraud Recall = 0.00 (0%)
+
+5. Final Best Model Ka Faisla
+Subse Best Model: Decision Tree Classifier (SMOTE ke saath)
+
+Kyun Select Kiya (Justification): Real-world fraud detection mein overall Accuracy ek dhoka hoti hai. Asli zindagi mein ek Fraud ko miss karna (False Negative) company ke liye hazaron dollars ka nuksan karta hai, jabki kisi sharif banday ko check kar lena (False Positive) bohot chota mamla hai. Isliye hamare liye Recall sabse zaroori metric tha.
+
+Random Forest aur XGBoost ne 97% accuracy toh dikhai, lekin test data par ek bhi fraud nahi pakda (0% Recall) kyunki unke ensemble voting system ne majority class ki taraf lean kar liya. Jabki Decision Tree ne test set ke 46% actual frauds (39 mein se 18 frauds) successfully pakad liye. Isliye, business goal ko saamne rakhte hue Decision Tree sabse best aur kaam ka model saabit hua.
